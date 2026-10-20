@@ -15,3 +15,83 @@
 /* Authentication entry points in the main navigation */
 .auth-top-link{white-space:nowrap;padding:9px 11px;font-size:11px}
 @media(max-width:760px){.auth-top-link{padding:8px 9px;font-size:10px}.topbar-right{gap:6px}.global-search{width:min(150px,24vw)}}
+/* ===== Studyverse Logout Button ===== */
+
+.logout-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 11px 18px;
+  min-height: 44px;
+
+  color: #ff8b94;
+  background: linear-gradient(
+    135deg,
+    rgba(244, 63, 94, 0.13),
+    rgba(239, 68, 68, 0.06)
+  );
+
+  border: 1px solid rgba(248, 113, 113, 0.25);
+  border-radius: 12px;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+
+  cursor: pointer;
+  white-space: nowrap;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.logout-button svg {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.logout-button:hover {
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    #e84b60,
+    #c9364b
+  );
+
+  border-color: rgba(255, 130, 145, 0.65);
+
+  box-shadow: 0 6px 20px rgba(232, 75, 96, 0.22);
+
+  transform: translateY(-2px);
+}
+
+.logout-button:hover svg {
+  transform: translateX(3px);
+}
+
+.logout-button:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: none;
+}
+
+.logout-button:focus-visible {
+  outline: 2px solid #fb7185;
+  outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .logout-button {
+    padding: 10px 14px;
+    gap: 8px;
+    font-size: 13px;
+  }
+}
