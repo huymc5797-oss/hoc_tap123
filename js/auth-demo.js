@@ -93,4 +93,9 @@
       submit.innerHTML = 'Tạo tài khoản <span>→</span>';
     }
   });
+    // Đăng xuất khỏi phiên demo hiện tại
+  window.logoutStudyverse = function () {
+    localStorage.removeItem('sv_user');
+    window.location.href = 'dang-nhap.html';
+  };
 })();
