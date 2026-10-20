@@ -81,11 +81,12 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
           window.location.href = "dang-nhap.html";
         }, 1000);
-      } catch (error) {
-        message.textContent = error.message;
-      } finally {
-        button.disabled = false;
-      }
-    });
-  }
+     } catch (error) {
+  console.error("Lỗi đăng ký:", error);
+  message.textContent = error.message || "Không thể kết nối máy chủ.";
+} finally {
+  button.disabled = false;
+}
+});
+}
 });
