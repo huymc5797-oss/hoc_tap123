@@ -45,11 +45,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Chưa chuyển trang vì backend hiện chưa cấp phiên đăng nhập.
       } catch (error) {
-        message.textContent = error.message;
-      } finally {
-        button.disabled = false;
-      }
-    });
+  console.error("Lỗi xác thực:", error);
+  message.textContent = error.message || "Không thể kết nối máy chủ.";
+} finally {
+  button.disabled = false;
+}
+});
   }
 
   if (registerForm) {
