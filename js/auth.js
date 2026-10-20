@@ -46,9 +46,7 @@ localStorage.setItem("sv_user", JSON.stringify(result.user));
 message.textContent = "Đăng nhập thành công! Đang chuyển trang...";
 
 // Chuyển đến trang chủ
-setTimeout(() => {
-  window.location.href = "trangchu.html";
-}, 800);
+window.location.href = "./trangchu.html";
       } catch (error) {
   console.error("Lỗi xác thực:", error);
   message.textContent = error.message || "Không thể kết nối máy chủ.";
