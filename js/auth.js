@@ -1,4 +1,4 @@
-const SUPABASE_URL = "https://ibeagogaitscqctumiqy.supabase.co/rest/v1/";
+const SUPABASE_URL = "https://ibeagogaitscqctumiqy.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_ZgNx01Yd_QbT7aNkzQW2IQ_GjA5V4N3";
 
 async function authRequest(action, username, password) {
