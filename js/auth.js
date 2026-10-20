@@ -78,6 +78,7 @@ window.location.href = "./trangchu.html";
 
       try {
         const result = await authRequest("register", username, password);
+        console.log("Đăng nhập thành công:", result);
 
         message.textContent = result.message;
 
