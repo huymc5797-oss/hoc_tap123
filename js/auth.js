@@ -37,18 +37,22 @@ document.addEventListener("DOMContentLoaded", () => {
       message.textContent = "Đang kiểm tra tài khoản...";
       button.disabled = true;
 
-      try {
-       const result = await authRequest("login", username, password);
+      if (!result.user) {
+    throw new Error("Đăng nhập thành công nhưng máy chủ không trả về thông tin user.");
+  }
 
-// Lưu thông tin người dùng sau khi xác thực thành công
-localStorage.setItem("sv_user", JSON.stringify(result.user));
+  localStorage.setItem("sv_user", JSON.stringify(result.user));
 
-message.textContent = "Đăng nhập thành công! Đang chuyển trang...";
+  message.textContent = "Đăng nhập thành công! Đang chuyển trang...";
 
-// Chuyển đến trang chủ
-window.location.href = "./trangchu.html";
-      } catch (error) {
-  console.error("Lỗi xác thực:", error);
+  console.log("Đang chuyển đến trang chủ...");
+
+  window.location.assign(
+    "https://huymc5797-oss.github.io/hoc_tap123/trangchu.html"
+  );
+
+} catch (error) {
+  console.error("Lỗi đăng nhập:", error);
   message.textContent = error.message || "Không thể kết nối máy chủ.";
 } finally {
   button.disabled = false;
