@@ -38,11 +38,17 @@ document.addEventListener("DOMContentLoaded", () => {
       button.disabled = true;
 
       try {
-        const result = await authRequest("login", username, password);
+       const result = await authRequest("login", username, password);
 
-        message.textContent = result.message;
+// Lưu thông tin người dùng sau khi xác thực thành công
+localStorage.setItem("sv_user", JSON.stringify(result.user));
 
-        // Chưa chuyển trang vì backend hiện chưa cấp phiên đăng nhập.
+message.textContent = "Đăng nhập thành công! Đang chuyển trang...";
+
+// Chuyển đến trang chủ
+setTimeout(() => {
+  window.location.href = "trangchu.html";
+}, 800);
       } catch (error) {
   console.error("Lỗi xác thực:", error);
   message.textContent = error.message || "Không thể kết nối máy chủ.";
