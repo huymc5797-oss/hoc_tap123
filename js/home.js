@@ -12,4 +12,25 @@
  function drawChart(){const data=weekData(),max=Math.max(1,...data.map(x=>x.value));document.getElementById("weekly-chart").innerHTML=data.map(x=>`<div class="bar-column"><span class="bar-value">${x.value||""}</span><div class="bar" style="height:${Math.max(3,x.value/max*78)}%"></div><span class="bar-day">${x.label}</span></div>`).join("")}
  function updateStats(){const sessions=getData("sessions",[]),today=todayKey(),todaySessions=sessions.filter(s=>s.day===today);document.getElementById("stat-focus").textContent=formatMinutes(sessions.reduce((n,s)=>n+(s.minutes||0),0));document.getElementById("stat-pomodoros").textContent=sessions.length;document.getElementById("stat-streak").textContent=sessions.some(s=>s.day===today)?"1 ngày":"0 ngày";document.getElementById("stat-tasks").textContent=tasks.filter(t=>t.done).length;drawChart()}
  updateStats();
+
+// Cập nhật tiến độ lộ trình trên trang chủ
+(function updateHomeRoadmapProgress() {
+  const items = getData("roadmap", []);
+  const total = items.length;
+  const completed = items.filter(item => item.done).length;
+
+  const percent = total > 0
+    ? Math.round(completed / total * 100)
+    : 0;
+
+  const bar = document.getElementById("home-roadmap-progress");
+  const label = document.getElementById("home-roadmap-percent");
+
+  if (bar) {
+    bar.style.width = percent + "%";
+  }
+
+  if (label) {
+    label.textContent = percent + "%";
+  }
 })();
