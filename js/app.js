@@ -13,8 +13,44 @@
   const getUser=()=>{try{return JSON.parse(localStorage.getItem("sv_user")||"null")}catch(e){return null}};
   window.SV={
     getUser,
-    getData(key,fallback){try{const v=localStorage.getItem("sv_"+key);return v?JSON.parse(v):fallback}catch(e){return fallback}},
-    setData(key,value){localStorage.setItem("sv_"+key,JSON.stringify(value))},
+    getData(key, fallback) {
+  try {
+    const user = this.getUser();
+
+    // Chưa đăng nhập thì không đọc dữ liệu học tập của tài khoản nào
+    if (!user) return fallback;
+
+    // Ưu tiên ID người dùng ổn định; nếu chưa có thì dùng tên tài khoản
+    const userId = user.id || user.username;
+
+    if (!userId) return fallback;
+
+    const storageKey =
+      `sv_user_${encodeURIComponent(String(userId).toLowerCase())}_${key}`;
+
+    const value = localStorage.getItem(storageKey);
+
+    return value !== null ? JSON.parse(value) : fallback;
+  } catch (e) {
+    return fallback;
+  }
+},
+
+setData(key, value) {
+  const user = this.getUser();
+
+  // Không lưu dữ liệu học tập khi chưa đăng nhập
+  if (!user) return;
+
+  const userId = user.id || user.username;
+
+  if (!userId) return;
+
+  const storageKey =
+    `sv_user_${encodeURIComponent(String(userId).toLowerCase())}_${key}`;
+
+  localStorage.setItem(storageKey, JSON.stringify(value));
+},
     toast(message,type=""){const root=document.getElementById("toast-root");if(!root)return;const el=document.createElement("div");el.className="toast "+type;el.textContent=message;root.appendChild(el);setTimeout(()=>el.remove(),3400)},
     escape(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))},
     formatMinutes(n){n=Math.max(0,Math.round(n||0));const h=Math.floor(n/60),m=n%60;return h?`${h} giờ ${m} phút`:`${m} phút`},
